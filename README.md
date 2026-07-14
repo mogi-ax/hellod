@@ -1,2 +1,6 @@
 # Hellod - graphical login manager with lua configuration
-still figuring out how to write markdown
+
+not developed yet
+
+currently no docs
+
