@@ -1,0 +1,16 @@
+-I/home/mogi/projects/hellod/include
+--std=gnu23
+
+
+
+-lc
+
+-lSDL3
+-lpam
+-llua
+-lm
+-ldl
+
+
+-o
+/home/mogi/projects/hellod/build/hellod

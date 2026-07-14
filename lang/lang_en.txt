@@ -1,0 +1,3 @@
+ERRMSG_INCORRECT_USAGE "Incorrect usage: %s"
+ERRMSG_UNKNOWN_ARGUMENT "Unknown argument: %s"
+ERRMSG_KMSDRM_NOT_SUPPORTED "kmsdrm is not available"
