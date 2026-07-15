@@ -4,6 +4,7 @@
 #include <renderer.h>
 #include <luaapi.h>
 #include <lua.h>
+#include <lualib.h>
 #include <lauxlib.h>
 #include <util.h>
 lua_State* L;
@@ -76,6 +77,17 @@ void Luaapi_initLua()
 void Luaapi_init()
 {
   L = luaL_newstate();
+  #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM == 504
+  luaL_requiref(L, "", luaopen_base, 1);
+  luaL_requiref(L, "", luaopen_package, 1);
+  luaL_requiref(L, "", luaopen_string, 1);
+  luaL_requiref(L, "", luaopen_utf8, 1);
+  luaL_requiref(L, "", luaopen_table, 1);
+  luaL_requiref(L, "", luaopen_math, 1);
+  #elif defined(LUA_VERSION_NUM) && LUA_VERSION_NUM == 505
+  luaL_openselectedlibs(L,LUA_GLIBK|LUA_LOADLIBK|LUA_STRLIBK|LUA_UTF8LIBK|LUA_TABLIBK|LUA_MATHLIBK,0)
+  #endif
+
   Luaapi_initLua();
 }
 void Luaapi_quit()
