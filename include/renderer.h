@@ -60,9 +60,10 @@ typedef struct Renderer_Object {
 void Renderer_init(struct Renderer_InitInfo iinfo);
 void Renderer_run();
 void Renderer_quit();
-void Renderer_loadImageAsTexture(Renderer_Texture* tex,const char* path);
-void Renderer_loadImageAsSurface(Renderer_Surface* surf,const char* path);
-void Renderer_createTexture(Renderer_Texture* tex,int w,int h);
-void Renderer_createSurface(Renderer_Surface* surf,int w,int h);
+int Renderer_loadImageAsTexture(Renderer_Texture* tex,const char* path);
+int Renderer_loadImageAsSurface(Renderer_Surface* surf,const char* path);
+int Renderer_createTexture(Renderer_Texture* tex,int w,int h);
+int Renderer_createSurface(Renderer_Surface* surf,int w,int h);
 void Renderer_freeTexture(Renderer_Texture* tex);
 void Renderer_freeSurface(Renderer_Surface* surf);
+

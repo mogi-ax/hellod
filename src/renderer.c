@@ -28,13 +28,14 @@
 #include <SDL3/SDL_surface.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+#include <inttypes.h>
 #include <lua.h>
 #include <lauxlib.h>
 #include <renderer.h>
 #include <stdlib.h>
+
 SDL_Window* sdlWindow = NULL;
 SDL_Renderer* sdlRenderer = NULL;
-
 
 
 void Renderer_init(struct Renderer_InitInfo iinfo)
@@ -91,6 +92,7 @@ void Renderer_run()
     SDL_RenderClear(sdlRenderer);
 
 
+
     SDL_RenderPresent(sdlRenderer);
   }
 }
@@ -103,33 +105,56 @@ void Renderer_quit()
 }
 
 
-void Renderer_loadImageAsTexture(Renderer_Texture* tex,const char* path)
+int Renderer_loadImageAsTexture(Renderer_Texture* tex,const char* path)
 {
   SDL_Surface* temp = SDL_LoadSurface(path);
+  if (temp == NULL)
+  {
+    return 0;
+  }
   tex->tex = SDL_CreateTextureFromSurface(sdlRenderer,temp);
+  if (tex->tex == NULL)
+  {
+    return 0;
+  }
   tex->w = temp->w;
   tex->h = temp->h;
   SDL_DestroySurface(temp);
+  return 1;
 }
-void Renderer_loadImageAsSurface(Renderer_Surface* surf,const char* path)
+int Renderer_loadImageAsSurface(Renderer_Surface* surf,const char* path)
 {
   surf->surf = SDL_LoadSurface(path);
+  if (surf->surf == NULL)
+  {
+    return 0;
+  }
   surf->w = surf->surf->w;
   surf->h = surf->surf->h;
+  return 1;
 }
-void Renderer_createTexture(Renderer_Texture* tex,int w,int h)
+int Renderer_createTexture(Renderer_Texture* tex,int w,int h)
 {
   tex->tex = SDL_CreateTexture(sdlRenderer,
     SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_STREAMING,w, h);
+  if (tex->tex == NULL)
+  {
+    return 0;
+  }
   tex->w = tex->tex->w;
   tex->h = tex->tex->h;
+  return 1;
 }
-void Renderer_createSurface(Renderer_Surface* surf,int w,int h)
+int Renderer_createSurface(Renderer_Surface* surf,int w,int h)
 {
-  Renderer_Surface* tex = surf; // im lazy
-  tex->surf = SDL_CreateSurface(w, h, SDL_PIXELFORMAT_ARGB8888);
-  tex->w = tex->surf->w;
-  tex->h = tex->surf->h;
+  surf->surf = SDL_CreateSurface(w, h, SDL_PIXELFORMAT_ARGB8888);
+  if (surf->surf == NULL)
+  {
+    return 0;
+  }
+  surf->w = surf->surf->w;
+  surf->h = surf->surf->h;
+  return 1;
 }
 void Renderer_freeSurface(Renderer_Surface* surf)
 {

@@ -1,4 +1,19 @@
+/*
+  Copyright (C) 2026 mogi <xerakbetter@gmail.com>
 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, see <https://www.gnu.org/licenses/>.
+*/
 
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_stdinc.h>
@@ -36,7 +51,7 @@ void Luaapi_initLua()
 void Luaapi_init()
 {
   L = luaL_newstate();
-  logi("L:%p",L);
+
   #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM == 504
   luaL_requiref(L, "", luaopen_base, 1);
   luaL_requiref(L, "", luaopen_package, 1);
