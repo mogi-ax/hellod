@@ -1,3 +1,0 @@
-ERRMSG_INCORRECT_USAGE "잘못된 사용법: %s"
-ERRMSG_UNKNOWN_ARGUMENT "잘못된 인자: %s"
-ERRMSG_KMSDRM_NOT_SUPPORTED "kmsdrm 을 사용할 수 없습니다"
