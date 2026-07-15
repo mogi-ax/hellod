@@ -16,6 +16,7 @@
 */
 
 
+#include "luaapi.h"
 #include <SDL3/SDL_init.h>
 #include <stdlib.h>
 #include <SDL3/SDL.h>
@@ -63,6 +64,11 @@ int main(int argc,char** argv)
   iinfo.testrun=flag_testrun;
   iinfo.display=SDL_GetPrimaryDisplay();
   Renderer_init(iinfo);
+  Luaapi_init();
+  Luaapi_executeFile(flag_config_path);
+  Renderer_run();
+  Luaapi_quit();
+  Renderer_quit();
   return 0;
 }
 

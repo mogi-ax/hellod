@@ -22,14 +22,20 @@
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_mutex.h>
 #include <SDL3/SDL_oldnames.h>
+#include <SDL3/SDL_pixels.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_stdinc.h>
+#include <SDL3/SDL_surface.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+#include <lua.h>
+#include <lauxlib.h>
 #include <renderer.h>
 #include <stdlib.h>
 SDL_Window* sdlWindow = NULL;
 SDL_Renderer* sdlRenderer = NULL;
+
+
 
 void Renderer_init(struct Renderer_InitInfo iinfo)
 {
@@ -43,7 +49,7 @@ void Renderer_init(struct Renderer_InitInfo iinfo)
     sdlWindow = SDL_CreateWindow("hellod",
        100, 100,SDL_WINDOW_BORDERLESS);
     }
-
+  
   int modecount=0;
   SDL_DisplayMode** modes=SDL_GetFullscreenDisplayModes(
     iinfo.display, &modecount);
@@ -58,8 +64,13 @@ void Renderer_init(struct Renderer_InitInfo iinfo)
   if (sdlRenderer==NULL) {
     SDL_Log("something got wrong %s",SDL_GetError());exit(1);
   }
-  bool running = true;
+  
   SDL_SetWindowSurfaceVSync(sdlWindow, 1);
+}
+void Renderer_run()
+{
+  bool running = true;
+  
   while (running)
   {
     SDL_Event event;
@@ -77,9 +88,20 @@ void Renderer_init(struct Renderer_InitInfo iinfo)
         }
       }
     }
+    SDL_RenderClear(sdlRenderer);
+
+    
     SDL_RenderPresent(sdlRenderer);
   }
+}
+
+void Renderer_quit()
+{
   SDL_DestroyRenderer(sdlRenderer);
   SDL_DestroyWindow(sdlWindow);
   SDL_Quit();
 }
+
+ // lua api ----------------------------------------------------------------------------
+
+
