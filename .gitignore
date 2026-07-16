@@ -1,9 +1,9 @@
 scripts/gen_locale.py
 scripts/add_license_header.py
+scripts
 lang
 build
 pammain.c
 .ssh
 git_ssh_wrap
 setup_git_env.sh
-include/lang.h

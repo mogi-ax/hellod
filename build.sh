@@ -45,7 +45,7 @@ $PYTHON "$SCRIPT_PATH/scripts/gen_locale.py" --lang="$PROGRAM_LANG"
 BUILD_FOLDER="$SCRIPT_PATH/build"
 mkdir $BUILD_FOLDER 2> /dev/null
 
-FLAGS="-I$INCLUDE_FOLDER $CFLAGS $LDFLAGS -o $BUILD_FOLDER/hellod"
+FLAGS="-I$INCLUDE_FOLDER $CFLAGS $LDFLAGS -o $BUILD_FOLDER/lualogin"
 echo "$FLAGS" | sed "s/ /\n/g" > $SCRIPT_PATH/compile_flags.txt
 $CC $FLAGS $SRC_LIST
 

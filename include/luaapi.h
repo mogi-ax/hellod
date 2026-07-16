@@ -16,7 +16,7 @@
 */
 #pragma once
 
-#define LUAAPI_MASTER_NAMESPACE_NAME "hd"
+#define LUAAPI_MASTER_NAMESPACE_NAME "ll"
 #define LUAAPI_CATEGORY_RENDERER "rend"
 #define LUAAPI_RENDERER_TYPENAME_SURFACE "renderer_surface"
 #define LUAAPI_RENDERER_TYPENAME_TEXTURE "renderer_texture"
